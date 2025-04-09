@@ -1,5 +1,5 @@
 import React from "react";
-import Metronome from "./assets/Metronome";
+import Metronome from "./Metronome";
 
 const App = () => {
   return (

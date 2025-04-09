@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Howl } from "howler";
-import Draggable from "react-draggable"; // Add this import
+import Draggable from "react-draggable";
 
 const Metronome = () => {
   const [bpm, setBpm] = useState(120);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [isDraggingSlider, setIsDraggingSlider] = useState(false); // Add this state
-  const [intervalMultiplier, setIntervalMultiplier] = useState(1); // Add state for interval multiplier
-  const [interval, setIntervalValue] = useState(60000 / bpm); // Add state for interval
+  const [isDraggingSlider, setIsDraggingSlider] = useState(false);
+  const [intervalMultiplier, setIntervalMultiplier] = useState(1);
+  multiplier;
+  const [interval, setIntervalValue] = useState(60000 / bpm);
   const intervalRef = useRef(null);
 
   const intervals = [
@@ -27,7 +28,7 @@ const Metronome = () => {
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
         fill="currentColor"
-        className="w-15 h-15 text-green-500" // Change color to green
+        className="w-15 h-15 text-green-500"
       >
         <path d="M8 5v14l11-7z" />
       </svg>
@@ -57,18 +58,18 @@ const Metronome = () => {
     }
 
     return () => clearInterval(intervalRef.current);
-  }, [isPlaying, interval, clickSound]); // Add interval to dependencies
+  }, [isPlaying, interval, clickSound]);
 
   const handleBpmChange = (e) => {
     const newBpm = e.target.value;
     setBpm(newBpm);
-    setIntervalValue(60000 / newBpm / intervalMultiplier); // Recalculate interval based on BPM and multiplier
+    setIntervalValue(60000 / newBpm / intervalMultiplier);
   };
 
   const handleIntervalChange = (e) => {
-    const newMultiplier = parseInt(e.target.value, 10); // Ensure the value is a number
+    const newMultiplier = parseInt(e.target.value, 10);
     setIntervalMultiplier(newMultiplier);
-    setIntervalValue(60000 / bpm / newMultiplier); // Recalculate interval based on BPM and new multiplier
+    setIntervalValue(60000 / bpm / newMultiplier);
   };
 
   const togglePlay = () => {
@@ -97,11 +98,11 @@ const Metronome = () => {
               max="240"
               value={bpm}
               onChange={handleBpmChange}
-              onMouseDown={() => setIsDraggingSlider(true)} // Set dragging state on mouse down
-              onMouseUp={() => setIsDraggingSlider(false)} // Reset dragging state on mouse up
-              onMouseLeave={() => setIsDraggingSlider(false)} // Reset dragging state on mouse leave
-              onTouchStart={() => setIsDraggingSlider(true)} // Set dragging state on touch start
-              onTouchEnd={() => setIsDraggingSlider(false)} // Reset dragging state on touch end
+              onMouseDown={() => setIsDraggingSlider(true)}
+              onMouseUp={() => setIsDraggingSlider(false)}
+              onMouseLeave={() => setIsDraggingSlider(false)}
+              onTouchStart={() => setIsDraggingSlider(true)}
+              onTouchEnd={() => setIsDraggingSlider(false)}
             />
           </div>
           <div className="my-5">
